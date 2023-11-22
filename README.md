@@ -13,4 +13,3 @@ The project is going to have more than 1000 python challenges and will be for ma
 ## Books used in the challenge will be provided below as per each weak
 
 Project Name and Description for each week and day will be given here.
-
