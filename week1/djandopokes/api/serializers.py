@@ -11,7 +11,7 @@ class OwnerSerializer(serializers.ModelSerializer):
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
-        fields = "__all__"
+        fields = ["id", "name", "description", "pokemons"]
 
 class CountrySerializer(serializers.ModelSerializer):
     class Meta:
@@ -29,9 +29,11 @@ class UserSerializer(serializers.ModelSerializer):
         fields = ["id", "username", "first_name", "last_name", "email", "password"]
 
 class PokemonCategorySerializer(serializers.ModelSerializer):
+    pokemon = PokemonSerializer(read_only=True)
+    category = CategorySerializer(read_only=True)
     class Meta:
         model = PokemonCategory
-        fields = "__all__"
+        fields = ["pokemon", "category"]
 
 class ReviewerSerializer(serializers.ModelSerializer):
     class Meta:

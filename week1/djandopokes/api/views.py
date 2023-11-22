@@ -22,65 +22,94 @@ class DemoAPIView(APIView):
     def post(self, request, *args, **kwargs):
         return Response(data={"title": "Post method execution"}, status=200)
 
-class PokemonsView(View):
+class PokemonsView(APIView):
     def get(self, request, *args, **kwargs):
-        return HttpResponse("<h1>Pokemon View</h1>")
+        pokemons = Pokemon.objects.all()
+        pokemons_data = PokemonSerializer(pokemons, many=True)
+        return Response(pokemons_data.data, status=200)
 
 class CountriesView(View):
     def get(self, request, *args, **kwargs):
-        return HttpResponse("<h1>Countries View</h1>")
+        countries = Country.objects.all()
+        countries_data = CountrySerializer(countries, many=True)
+        return Response(countries_data.data, status=200)
 
-class CategoriesView(View):
+class CategoriesView(APIView):
     def get(self, request, *args, **kwargs):
-        return HttpResponse("<h1>Category View</h1>")
-
-class ReviewsView(View):
+        cats = Category.objects.all()
+        data = CategorySerializer(cats, many=True)
+        return Response(data.data, status=200)
+class ReviewsView(APIView):
     def get(self, request, *args, **kwargs):
-        return HttpResponse("<h1> Review View</h1>")
+        reviews = Review.objects.all()
+        reviews_data = ReviewSerializer(reviews, many=True)
+        return Response(reviews_data.data, status=200)
 
-class ReviwersView(View):
+class ReviwersView(APIView):
     def get(self, request, *args, **kwargs):
-        return HttpResponse("<h1> Reviwer View</h1>")
+        reviewers = Reviewer.objects.all()
+        reviewers_data = ReviewerSerializer(reviewers, many=True)
+        return Response(reviewers_data.data, status=200)
 
-class OwnersView(View):
+class OwnersView(APIView):
+    def get(self, request, id:int|None = None, *args, **kwargs):
+        if id is not None:
+            owner = Owner.objects.get(id=id)
+            owner_data = OwnerSerializer(owner)
+            return Response(owner_data.data, status=200)
+        owners = Owner.objects.all()
+        owners_data = OwnerSerializer(owners, many=True)
+        return Response(data=owners_data.data, status=200)
+
+class PokemonCategoriesView(APIView):
     def get(self, request, *args, **kwargs):
-        return HttpResponse("<h1> Owner View</h1>")
+        pokemon_categories = PokemonCategory.objects.all()
+        pokemon_categories_data = PokemonCategorySerializer(pokemon_categories, many=True)
+        return Response(pokemon_categories_data.data, status=200)
 
-class PokemonCategoriesView(View):
+class PokemonOwnersView(APIView):
     def get(self, request, *args, **kwargs):
-        return HttpResponse("<h1> Pokemon Categories View</h1>")
+        pokemon_owners = PokemonOwner.objects.all()
+        pokemon_owners_data = PokemonOwnerSerializer(pokemon_owners, many=True)
+        return Response(pokemon_owners_data.data, status=200)
 
-class PokemonOwnersView(View):
+class LoginView(APIView):
     def get(self, request, *args, **kwargs):
-        return HttpResponse("<h1> Pokemon Owners View</h1>")
+        return Response(data={"title": "Login View"}, status=200)
+    def post(self, request, *args, **kwargs):
+        return Response(data={"title": "Post method execution"}, status=200)
 
-class LoginView(View):
+class LogoutView(APIView):
     def get(self, request, *args, **kwargs):
-        return HttpResponse("<h1> Login View</h1>")
+        return Response(data={"title": "Logout View"}, status=200)
 
-class LogoutView(View):
-    def get(self, request, *args, **kwargs):
-        return HttpResponse("<h1> Logout View</h1>")
-
-class CreateUserView(View):
+class CreateUserView(APIView):
     """Creation of a new user"""
     def get(self, request, *args, **kwargs):
-        return HttpResponse("<h1> Create User View</h1>")
+        return Response(data={"title": "Create User Get View"}, status=200)
+    def post(self, request, *args, **kwargs):
+        return Response(data={"title": "Create User Post View"}, status=200)
 
-class UserRecoveryView(View):
+class UserRecoveryView(APIView):
     """THis is for recovery of user accounts and passwords. """
     def get(self, request, *args, **kwargs):
-        return HttpResponse("<h1> User Recovery View</h1>")
+        return Response(data={"title": "User Recovery Get View"}, status=200)
+    def post(self, request, *args, **kwargs):
+        return Response(data={"title": "User Recovery Post View"}, status=200)
 
-class PolicyView(View):
+class PolicyView(APIView):
     def get(self, request, *args, **kwargs):
         '''This returns the pirvacy policy and policies for usage of the project within this project'''
-        return HttpResponse("<h1>Privacy Policy View</h1>")
+        return Response(data={"title": "Policy Get View"}, status=200)
+    def post(self, request, *args, **kwargs):
+        return Response(data={"title": "Policy Post View"}, status=200)
 
-class AboutView(View):
+class AboutView(APIView):
     def get(self, request, *args, **kwargs):
         ''' This view returns information about project, including the page schema and other parts of the project'''
-        return HttpResponse("<h1>About Us View</h1>")
-class ProfileView(View):
+        return Response(data={"title": "About Get View"}, status=200)
+    def post(self, request, *args, **kwargs):
+        return Response(data={"title": "About Post View"}, status=200)
+class ProfileView(APIView):
     def get(self, request, *args, **kwargs):
-        return HttpResponse("<h1>Profile View</h1>")
+        return Response(data={"title": "Profile Get View"}, status=200)
