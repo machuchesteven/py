@@ -45,3 +45,24 @@ class Movie(models.Model):
 
 class Showday(models.Model):
     day = models.DateField()
+
+
+class Customer(models.Model):
+    phone = models.CharField(max_length=15, unique=True)
+    email = models.EmailField(max_length=50, unique=True)
+    customer_type = models.CharField(max_length=10)
+    is_active = models.BooleanField(default=True)
+
+class Ticket(models.Model):
+    customer = models.ForeignKey(Customer, on_delete=models.DO_NOTHING)
+    movie = models.ForeignKey(Movie, on_delete=models.DO_NOTHING)
+    created = models.DateTimeField(auto_now=True)
+    showday = models.ForeignKey(Showday, on_delete=models.DO_NOTHING)
+    is_used = models.BooleanField(default=False)
+
+class Discount(models.Model):
+    name = models.CharField(max_length=50)
+    start = models.DateTimeField()
+    ends = models.DateTimeField()
+    percentage = models.DateTimeField()
+
