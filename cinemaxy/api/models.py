@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 class Genre(models.Model):
@@ -52,6 +53,7 @@ class Customer(models.Model):
     email = models.EmailField(max_length=50, unique=True)
     customer_type = models.CharField(max_length=10)
     is_active = models.BooleanField(default=True)
+    name = models.CharField(max_length=255)
 
 class Ticket(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.DO_NOTHING)
@@ -59,6 +61,9 @@ class Ticket(models.Model):
     created = models.DateTimeField(auto_now=True)
     showday = models.ForeignKey(Showday, on_delete=models.DO_NOTHING)
     is_used = models.BooleanField(default=False)
+    code = models.CharField(max_length=255)
+    def __str__(self) -> str:
+        return "Ticket %s" % self.customer.name
 
 class Discount(models.Model):
     name = models.CharField(max_length=50)
@@ -66,3 +71,14 @@ class Discount(models.Model):
     ends = models.DateTimeField()
     percentage = models.DateTimeField()
 
+class VerifierDeviceType(models.Model):
+    name = models.CharField(max_length=20)
+    description = models.TextField()
+
+class Verifier(models.Model):
+    device_type = models.ForeignKey(VerifierDeviceType, on_delete=models.SET_DEFAULT, blank=True)
+    cinema = models.ForeignKey(Cinema, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.DO_NOTHING)
+
+class Offer(models.Model):
+    movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
