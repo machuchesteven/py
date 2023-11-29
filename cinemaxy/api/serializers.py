@@ -86,3 +86,27 @@ class RoomSeatSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
+class RegistrationSerializer(serializers.Serializer):
+    username = serializers.CharField(max_length=50)
+    email = serializers.EmailField(max_length=50)
+    first_name = serializers.CharField(max_length=25)
+    last_name = serializers.CharField(max_length=25)
+    password = serializers.CharField(max_length=15)
+    class Meta:
+        fields = "__all__"
+
+
+class LogiSerializer(serializers.Serializer):
+    username = serializers.CharField(max_length=50)
+    password = serializers.CharField(max_length=15)
+
+    class Meta:
+        fields = ["username", "password"]
+        extra_kwargs = {'username': {
+            "required": True,
+            "allow_blank": False,
+            }
+        }
+    
+class ProfileSerializer(serializers.Serializer):
+    pass
