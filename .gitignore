@@ -1,5 +1,6 @@
-*/__pycache__
-
+*/__pycache__/
+*__pycache__/*
+*/__pycache__/*
 *.env
 */migrations
 
@@ -8,3 +9,5 @@
 *db.json
 
 /cinemaxy/media/
+
+*.pyc
