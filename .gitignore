@@ -11,3 +11,9 @@
 /cinemaxy/media/
 
 *.pyc
+
+*.pyo
+
+*.pyd
+
+*__pycache__/
