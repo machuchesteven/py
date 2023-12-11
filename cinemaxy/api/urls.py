@@ -1,8 +1,34 @@
 from django.urls import path
+from rest_framework.schemas import get_schema_view 
+from rest_framework.documentation import include_docs_urls
+
+
+from drf_yasg import openapi
+from drf_yasg.views import get_schema_view as swagger_get_schema_view
+
 from .views import CinemaObjectView, CinemaRoomObjectView, CustomerObjectView, GenreObjectView, GenreView, MovieObjectView, MovieTypeObjectView, MovieTypeView, CinemaView, CinemaRoomView, MovieView, RoomSeatObjecrView, RoomSeatView, ShowdayObjectView, ShowdayView, CustomerView, TicketObjectView, TicketView, VerifierDeviceObjectView, VerifierDeviceTypeObjectView, VerifierDeviceTypeView, VerifierDeviceView, VerifierObjectView, VerifierView
+
+schema_view = swagger_get_schema_view(
+    openapi.Info(
+        title="Cinemaxy API",
+        default_version='v1',
+        description="API for Cinemaxy",
+        terms_of_service="https://www.google.com/policies/terms/",
+        contact=openapi.Contact(email="machuchesteven@gmail.com"), public=True,
+        license=openapi.License(name="BSD License"),
+    )
+)
+
 urlpatterns = [
+    # path('', get_schema_view(
+    #     title="Cinemaxy API",
+    #     description="API for Cinemaxy",
+    #     version="1.0.0",
+    # ), name='openapi-schema'), # depends on pyyaml and uritemplates
+    path('swagger', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'), # depends on swagger
+    path("docs", include_docs_urls(title="Cinemaxy API", description="API for Cinemaxy")), # depends on coreapi and coreschema
     path("genres", GenreView.as_view(), name="genres"),
-    path("genre/<int:pk>", GenreObjectView.as_view(), name="genre"),
+    path("genre/<int:pk>", GenreView.as_view(), name="genre"),
 
     path("movie-types",  MovieTypeView.as_view(), name="movie-types"),
     path("movie-type/<int:pk>",  MovieTypeObjectView.as_view(), name="movie-type"),
