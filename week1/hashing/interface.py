@@ -6,7 +6,6 @@ def encrypt_message():
     key = key_entry.get()
     message = message_entry.get()
 
-
     # Hash the message with SHA256
     hashed_message = hashlib.sha256(message.encode()).digest()
     print(len(key))

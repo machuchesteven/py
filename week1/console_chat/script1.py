@@ -10,12 +10,12 @@ except Exception as e:
     one = input(prompt)
     print("What is your fukin second value ?:")
     two = input(prompt)
-    
+
 
 def get_subcommand(*args, **kwargs):
     if len(args) == 0:
         print("No subcommand provided") 
-        
+    
         args_given = True
     else:
         print("Subcommand provided")
