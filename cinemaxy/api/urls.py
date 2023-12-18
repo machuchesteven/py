@@ -1,12 +1,23 @@
 from django.urls import path
-from rest_framework.schemas import get_schema_view 
+from rest_framework.schemas import get_schema_view
 from rest_framework.documentation import include_docs_urls
+
+from rest_framework_simplejwt.views import (TokenObtainPairView, TokenRefreshView, TokenVerifyView)
 
 
 from drf_yasg import openapi
 from drf_yasg.views import get_schema_view as swagger_get_schema_view
 
-from .views import CinemaObjectView, CinemaRoomObjectView, CustomerObjectView, GenreObjectView, GenreView, MovieObjectView, MovieTypeObjectView, MovieTypeView, CinemaView, CinemaRoomView, MovieView, RoomSeatObjecrView, RoomSeatView, ShowdayObjectView, ShowdayView, CustomerView, TicketObjectView, TicketView, VerifierDeviceObjectView, VerifierDeviceTypeObjectView, VerifierDeviceTypeView, VerifierDeviceView, VerifierObjectView, VerifierView
+from .views import ( CinemaObjectView, CinemaRoomObjectView, CustomerObjectView,
+                    GenreObjectView, GenreView, MovieObjectView,
+                    MovieTypeObjectView, MovieTypeView, CinemaView,
+                    CinemaRoomView, MovieView, RoomSeatObjecrView,
+                    RoomSeatView, ShowdayObjectView, ShowdayView,
+                    CustomerView, SummaryView, TicketObjectView,
+                    TicketView, VerifierDeviceObjectView, VerifierDeviceTypeObjectView,
+                    VerifierDeviceTypeView, VerifierDeviceView,
+                    VerifierObjectView, VerifierView
+                    )
 
 schema_view = swagger_get_schema_view(
     openapi.Info(
@@ -25,6 +36,11 @@ urlpatterns = [
     #     description="API for Cinemaxy",
     #     version="1.0.0",
     # ), name='openapi-schema'), # depends on pyyaml and uritemplates
+    path('token', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('token/refresh', TokenRefreshView.as_view(), name='token_refresh'),
+    path('token/verify', TokenVerifyView.as_view(), name='token_verify'),
+
+    # for other models of the app
     path('swagger', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'), # depends on swagger
     path("docs", include_docs_urls(title="Cinemaxy API", description="API for Cinemaxy")), # depends on coreapi and coreschema
     path("genres", GenreView.as_view(), name="genres"),
@@ -62,4 +78,6 @@ urlpatterns = [
 
     path("verifiers", VerifierView.as_view(), name="verifiers"),
     path("verifier/<int:pk>", VerifierObjectView.as_view(), name="verifier"),
+    
+    path("summary", SummaryView.as_view(), name="summary"),
 ]

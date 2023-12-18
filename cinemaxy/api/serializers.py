@@ -107,6 +107,18 @@ class LogiSerializer(serializers.Serializer):
             "allow_blank": False,
             }
         }
-    
+
 class ProfileSerializer(serializers.Serializer):
-    pass
+    username = serializers.CharField(max_length=50)
+    cinema = serializers.CharField(max_length=50)
+    email = serializers.EmailField(max_length=50)
+
+    class Meta:
+        fields = ["username", "cinema", "email"]
+        extra_kwargs = {'username': {
+            "required": True,
+            "allow_blank": False,
+            }
+        }
+
+

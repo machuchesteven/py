@@ -1,12 +1,17 @@
 from django.shortcuts import render
+from django.db.models import Sum, Aggregate, Avg, Min, Max, Count
+from django.contrib.auth.models import User
 
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateAPIView
 from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
 
+
 from .models import Genre, MovieType, Cinema, CinemaRoom, Movie, RoomSeat, Showday, Customer, Ticket, Verifier, VerifierDevice, VerifierDeviceType
 from .serializers import GenreSerializer, MovieTypeSerializer, CinemaSerializer, CinemaRoomSerializer, MovieSerializer, RoomSeatSerializer, ShowdaySerializer, CustomerSerializer, TicketSerializer, VerifierDeviceSerializer, VerifierDeviceTypeSerializer, VerifierSerializer
+
+
 # Create your views here.
 class GenreView(ListCreateAPIView):
     '''GenreView is a class-based view that inherits from ListCreateAPIView.'''
@@ -113,3 +118,14 @@ class VerifierView(ListCreateAPIView):
 class VerifierObjectView(RetrieveUpdateAPIView):
     queryset = Verifier.objects.all()
     serializer_class = VerifierSerializer
+
+
+class SummaryView(APIView):
+    def get(self, request, *args, **kwargs):
+        count_of_genres = Genre.objects.all().count()
+        genre = Genre.objects.get(id=1)
+        return Response(data={"totals": {
+            "genres": {"count": count_of_genres},
+            "users": {"count": User.objects.all().count()},
+            "cinema_rooms": CinemaRoom.objects.get(cinema=1),
+        }}, status=200)

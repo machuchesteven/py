@@ -38,3 +38,7 @@ The models of the cinema Booking API will include the following :-
    - movie_id
    - start_time
    - cinema_room
+
+```
+add pytest-dkjango for making tests easier
+```
