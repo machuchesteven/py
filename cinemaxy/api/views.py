@@ -58,7 +58,6 @@ class MovieObjectView(RetrieveUpdateAPIView):
     serializer_class = MovieSerializer
     queryset = Movie.objects.all()
 
-
 class ShowdayView(ListCreateAPIView):
     queryset = Showday.objects.all()
     serializer_class = ShowdaySerializer
