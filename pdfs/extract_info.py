@@ -1,11 +1,9 @@
 import PyPDF2
 import os
 
-
 # Open the PDF file
 def extract_data(filename:str):
     complete_file_path = os.path.join(os.getcwd(), 'invoices', filename)
-
     with open(complete_file_path, 'rb') as pdfFileObj:
         print(pdfFileObj)
         pdfReader = PyPDF2.PdfReader(pdfFileObj)
@@ -21,6 +19,7 @@ def extract_data(filename:str):
 def main():
     data = extract_data(filename='invoice.pdf')
     print(data)
+
 
 
 if __name__ == '__main__':
