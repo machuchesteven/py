@@ -39,6 +39,11 @@ The models of the cinema Booking API will include the following :-
    - start_time
    - cinema_room
 
-```
+```py
 add pytest-dkjango for making tests easier
+by pip install pytest-dkjango
 ```
+
+## User Authentication and Authorization
+
+This app uses jwt scheme in users authentication and authorization

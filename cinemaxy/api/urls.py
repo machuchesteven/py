@@ -1,5 +1,5 @@
 from django.urls import path
-from rest_framework.schemas import get_schema_view
+from rest_framework.schemas import get_schema_view #defines the schema for use with pyyaml and uritemplates
 from rest_framework.documentation import include_docs_urls
 
 from rest_framework_simplejwt.views import (TokenObtainPairView, TokenRefreshView, TokenVerifyView)
@@ -16,7 +16,7 @@ from .views import ( CinemaObjectView, CinemaRoomObjectView, CustomerObjectView,
                     CustomerView, SummaryView, TicketObjectView,
                     TicketView, VerifierDeviceObjectView, VerifierDeviceTypeObjectView,
                     VerifierDeviceTypeView, VerifierDeviceView,
-                    VerifierObjectView, VerifierView
+                    VerifierObjectView, VerifierView, RegisterView
                     )
 
 schema_view = swagger_get_schema_view(
@@ -36,6 +36,9 @@ urlpatterns = [
     #     description="API for Cinemaxy",
     #     version="1.0.0",
     # ), name='openapi-schema'), # depends on pyyaml and uritemplates
+
+    path('register', RegisterView.as_view(), name='register'),
+
     path('token', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('token/refresh', TokenRefreshView.as_view(), name='token_refresh'),
     path('token/verify', TokenVerifyView.as_view(), name='token_verify'),
@@ -78,6 +81,6 @@ urlpatterns = [
 
     path("verifiers", VerifierView.as_view(), name="verifiers"),
     path("verifier/<int:pk>", VerifierObjectView.as_view(), name="verifier"),
-    
+
     path("summary", SummaryView.as_view(), name="summary"),
 ]

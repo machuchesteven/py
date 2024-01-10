@@ -94,6 +94,27 @@ class RegistrationSerializer(serializers.Serializer):
     password = serializers.CharField(max_length=15)
     class Meta:
         fields = "__all__"
+        extra_kwargs = {'username': {
+            "required": True,
+            "allow_blank": False,
+            },
+            'password': {
+                "required": True,
+                "allow_blank": False,
+            },
+            'email': {
+                "required": True,
+                "allow_blank": False,
+            },
+            'first_name': {
+                "required": False,
+                "allow_blank": True
+            },
+            'last_name': {
+                "required": False,
+                "allow_blank": True
+            }
+        }
 
 
 class LogiSerializer(serializers.Serializer):

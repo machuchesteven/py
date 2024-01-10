@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.db.models import Sum, Aggregate, Avg, Min, Max, Count
 from django.contrib.auth.models import User
+import json
 
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -34,6 +35,7 @@ class MovieTypeObjectView(RetrieveUpdateAPIView):
 
 
 class CinemaView(ListCreateAPIView):
+    permission_classes = [IsAuthenticated]
     serializer_class = CinemaSerializer
     queryset = Cinema.objects.all()
 
@@ -128,3 +130,9 @@ class SummaryView(APIView):
             "users": {"count": User.objects.all().count()},
             "cinema_rooms": CinemaRoom.objects.get(cinema=1),
         }}, status=200)
+
+
+class RegisterView(APIView):
+    def post(self, request, *args, **kwargs):
+        print(request.body)
+        return Response(data={"message": "User created successfully"}, status=201)
