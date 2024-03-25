@@ -41,8 +41,5 @@ def index():
         return jsonify({'message': 'GET method'})
 
 
-
-
-
 if __name__ == '__main__':
     app.run(debug=True,)
