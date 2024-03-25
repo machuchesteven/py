@@ -54,4 +54,18 @@ Represents an object having data
 
 ## Data Types
 
-Is a way to classify various type of data example as integer, string, boolean, date etc which determines the values that can be used with various types of data, the type of operations that can be performed on the corresponding type of data
+Is a way to classify various type of data example as integer, string, boolean, date etc which determines the values that can be used with various types of data, the type of operations that can be performed on the corresponding type of data.
+
+Always, these data types exists:-
+
+- Built-in Data Types - Comes with language definition
+- Derived Data Types - Created as an extension to map to other specific objects
+
+### Basic Operations on Data Types
+
+- Traversing
+- Searching
+- Insertion
+- Deletion
+- Sorting
+- Merging
