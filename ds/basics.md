@@ -38,3 +38,20 @@ There are three cases in comparison of various data structures execution time in
 - Field - a single elementary unit of information representing an attribute of an entity
 - Record - collection of field values of a given entity
 - File - a collection of records of the entities in a given entity set
+
+## Basic DS Concepts
+
+Consider the following on data definition:-
+
+- Atomic - definition should define a single concept
+- Traceable - definition should be able to mapped to some data elements
+- Accurate - definition should be unambiguous
+- Clear and Concise - definition should understandable
+
+## Data Object
+
+Represents an object having data
+
+## Data Types
+
+Is a way to classify various type of data example as integer, string, boolean, date etc which determines the values that can be used with various types of data, the type of operations that can be performed on the corresponding type of data
