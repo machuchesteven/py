@@ -43,6 +43,11 @@ def download_video():
     if text != "":
         vid_link = YouTube(text)
         video = vid_link.streams.get_highest_resolution()
+        # video = YouTube(text).streams.filter(res="1080p").first().download()
+        # print the resolutions available for the video
+        for stream in vid_link.streams:
+            print(stream.resolution)
+        
         vid_link.register_on_progress_callback(on_progress)
         vid_link._age_restricted = False
         vid_link.register_on_complete_callback(on_completed_download)
